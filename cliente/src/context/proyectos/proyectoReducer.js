@@ -5,8 +5,9 @@ import {
   VALIDAR_FORMULARIO, 
   PROYECTO_ACTUAL,
   ELIMINAR_PROYECTO } from "../../types";
-
-export default (state, action) => {
+  
+  // eslint-disable-next-line
+  export default (state, action) => {
   switch(action.type) {
     case FORMULARIO_PROYECTO:
       return {

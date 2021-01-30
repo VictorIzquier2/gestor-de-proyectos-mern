@@ -1,12 +1,16 @@
 import React, {useReducer} from 'react';
 import TareaContext from './tareaContext';
 import TareaReducer from './tareaReducer';
-
+import {v4 as uuidv4} from 'uuid';
 import {
   TAREAS_PROYECTO,
   AGREGAR_TAREA,
   VALIDAR_TAREA,
-  ELIMINAR_TAREA} from '../../types';
+  ELIMINAR_TAREA,
+  ESTADO_TAREA,
+  TAREA_ACTUAL,
+  MODIFICAR_TAREA
+} from '../../types';
   
 const TareaState = props => {
   const initialState = {
@@ -25,8 +29,9 @@ const TareaState = props => {
     {id: 12, nombre: 'Elegir Hosting', estado: true, proyectoId: 4}
   ],
   tareasproyecto: null,
-  errortarea: false
-
+  errortarea: false,
+  tareaseleccionada: null
+  
   }
 
   // Crear el dispatch y state 
@@ -44,6 +49,7 @@ const TareaState = props => {
 
   // Agregar una tarea al proyecto seleccionado 
   const agregarTarea = tarea => {
+    tarea.id = uuidv4();
     dispatch({
       type: AGREGAR_TAREA,
       payload: tarea
@@ -65,16 +71,44 @@ const TareaState = props => {
     })
   }
   
+  // Cambia el estado de cada tarea
+  const cambiarEstadoTarea = tarea => {
+    dispatch({
+      type: ESTADO_TAREA,
+      payload: tarea
+    })
+  }
+
+  // Extrae una tarea para edicion
+  const guardarTareaActual = tarea => {
+    dispatch({
+      type: TAREA_ACTUAL,
+      payload: tarea
+    })
+  }
+
+  // Modifica una tarea 
+  const modificarTarea = tarea => {
+    dispatch({
+      type: MODIFICAR_TAREA,
+      payload: tarea 
+    })
+  }
+
   return(
     <TareaContext.Provider 
       value={{
         tareas: state.tareas,
         tareasproyecto: state.tareasproyecto,
         errortarea: state.errortarea,
+        tareaseleccionada: state.tareaseleccionada,
         obtenerTareas,
         agregarTarea,
         validarTarea,
-        eliminarTarea
+        eliminarTarea,
+        cambiarEstadoTarea,
+        guardarTareaActual,
+        modificarTarea
       }}>
       {props.children}
     </TareaContext.Provider>
