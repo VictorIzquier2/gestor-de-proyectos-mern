@@ -3,7 +3,7 @@ import React from 'react';
 const Bar = () => {
   return ( 
     <header className='app-header'>
-      <p className='nombre-usuario'>Hola <span>Juan Pablo</span></p>
+      <p className='nombre-usuario'>Hola <span>Victor</span></p>
 
       <nav className='nav-principal'>
         <a href='#!'>Cerrar sesión</a>
