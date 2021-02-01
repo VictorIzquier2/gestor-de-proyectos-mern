@@ -76,3 +76,26 @@ exports.autentificarUsuario = async (req, res) => {
       })
   }
 }
+
+// Obtiene que usuario está autentificado
+exports.usuarioAutentificado = async (req, res) => {
+  try{
+    const usuario = await Usuario.findById(req.usuario.id).select('-password');
+    return res
+      .status(200)
+      .send({
+        status: 'success',
+        mensaje: 'El usuario se ha autentificado con éxito',
+        usuario
+      })
+  }catch(err){
+    console.log(err);
+    return res
+      .status(500)
+      .send({
+        status: 'error',
+        mensaje: 'Hubo un error',
+        err
+      })
+  }
+}
