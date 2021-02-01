@@ -47,7 +47,7 @@ exports.crearProyecto = async (req, res) => {
 
 exports.obtenerProyectos = async (req, res)=>{
   try{
-    const proyectos = await Proyecto.find({creador: req.usuario.id}).sort({creado: -1})
+    const proyectos = await Proyecto.find({creador: req.usuario.id}).sort({creado: -1});
     return res
       .status(200)
       .send({
@@ -103,8 +103,10 @@ exports.actualizarProyecto = async (req, res)=> {
         mensaje: 'Proyecto no encontrado'
       })
     }
-
+    console.log(proyecto.creador.toString());
+    console.log(req.usuario.id);
     // verificar el creador del proyecto
+
     if(proyecto.creador.toString() !== req.usuario.id){
        return res
         .status(401)

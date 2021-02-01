@@ -86,7 +86,7 @@ exports.usuarioAutentificado = async (req, res) => {
       .send({
         status: 'success',
         mensaje: 'El usuario se ha autentificado con éxito',
-        usuario
+        usuario: usuario
       })
   }catch(err){
     console.log(err);
